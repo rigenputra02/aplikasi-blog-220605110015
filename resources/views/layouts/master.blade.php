@@ -292,7 +292,7 @@
             <nav>
                 <ul class="nav-menu">
 
-                    {{-- <li>
+                    <li>
                         <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">
                             Beranda
                         </a>
@@ -313,10 +313,11 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">
+                        <a href="{{ route('tentang.kami') }}"
+                            class="{{ request()->routeIs('tentang.kami') ? 'active' : '' }}">
                             Tentang
                         </a>
-                    </li> --}}
+                    </li>
 
                 </ul>
             </nav>
@@ -330,59 +331,65 @@
 
             <div class="row g-4">
 
-                <!-- CONTENT -->
-                <div class="main-content col-lg-8">
-                    @yield('content')
-                </div>
+                @if (View::hasSection('hideWidget'))
 
-                <!-- SIDEBAR -->
-                <div class="col-lg-4">
+                    <div class="main-content col-lg-12">
+                        @yield('content')
+                    </div>
+                @else
+                    <div class="main-content col-lg-8">
+                        @yield('content')
+                    </div>
 
-                    @hasSection('widget')
+                    <div class="col-lg-4">
 
-                        @yield('widget')
-                    @else
-                        <div class="card shadow-sm sidebar-card">
+                        @hasSection('widget')
 
-                            <div class="card-body">
+                            @yield('widget')
+                        @else
+                            <div class="card shadow-sm sidebar-card">
 
-                                <h5 class="sidebar-title">
-                                    Kategori Artikel
-                                </h5>
+                                <div class="card-body">
 
-                                <a href="{{ route('beranda') }}"
-                                    class="category-item {{ request()->routeIs('beranda') ? 'active' : '' }}">
+                                    <h5 class="sidebar-title">
+                                        Kategori Artikel
+                                    </h5>
 
-                                    <span>Semua Artikel</span>
+                                    <a href="{{ route('beranda') }}"
+                                        class="category-item {{ request()->routeIs('beranda') ? 'active' : '' }}">
 
-                                    <span class="category-badge">
-                                        {{ $totalArtikel ?? 0 }}
-                                    </span>
-
-                                </a>
-
-                                @foreach ($kategoriSidebar as $kategori)
-                                    <a href="{{ route('kategori.show', $kategori->id) }}"
-                                        class="category-item {{ isset($kategoriAktif) && $kategoriAktif->id == $kategori->id ? 'active' : '' }}">
-
-                                        <span>
-                                            {{ $kategori->nama_kategori }}
-                                        </span>
+                                        <span>Semua Artikel</span>
 
                                         <span class="category-badge">
-                                            {{ $kategori->artikel_count }}
+                                            {{ $totalArtikel ?? 0 }}
                                         </span>
 
                                     </a>
-                                @endforeach
+
+                                    @foreach ($kategoriSidebar as $kategori)
+                                        <a href="{{ route('kategori.show', $kategori->id) }}"
+                                            class="category-item {{ isset($kategoriAktif) && $kategoriAktif->id == $kategori->id ? 'active' : '' }}">
+
+                                            <span>
+                                                {{ $kategori->nama_kategori }}
+                                            </span>
+
+                                            <span class="category-badge">
+                                                {{ $kategori->artikel_count }}
+                                            </span>
+
+                                        </a>
+                                    @endforeach
+
+                                </div>
 
                             </div>
 
-                        </div>
+                        @endif
 
-                    @endif
+                    </div>
 
-                </div>
+                @endif
 
             </div>
 

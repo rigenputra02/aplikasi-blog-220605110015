@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
 // Route Publik
 Route::get('/', [LandingController::class, 'index'])
     ->name('beranda');
+Route::get('/tentang-kami', [LandingController::class, 'tentangKami'])
+    ->name('tentang.kami');
 
 // Artikel berdasarkan kategori
 Route::get('/kategori/{id}',

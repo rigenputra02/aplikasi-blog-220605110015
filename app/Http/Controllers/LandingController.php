@@ -40,6 +40,10 @@ class LandingController extends Controller
             'kategoriAktif'
         ));
     }
+    public function tentangKami()
+    {
+        return view('landing.tentang');
+    }
     /**
      * Show the form for creating a new resource.
      */
