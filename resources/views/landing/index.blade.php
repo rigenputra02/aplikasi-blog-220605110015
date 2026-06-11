@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Beranda')
 @section('content')
-    @foreach ($artikel as $item)
+    @forelse ($artikel as $item)
         <div class="card content-card shadow-sm mb-4">
 
             @if ($item->gambar)
@@ -51,5 +51,10 @@
             </div>
 
         </div>
-    @endforeach
+    @empty
+
+        <div class="alert alert-info">
+            Belum ada artikel yag tersedia
+        </div>
+    @endforelse
 @endsection

@@ -56,12 +56,12 @@
                             Masukkan kredensial untuk melanjutkan </p>
                     </div>
                     <div class="card-body">
-                        @if($errors->has('gagal'))
-                        <div class="alert alert-danger alert-dismissible fade show  py-2 small" role="alert">
-                            {{ $errors->first('gagal') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert">
-                            </button>
-                        </div>
+                        @if ($errors->has('gagal'))
+                            <div class="alert alert-danger alert-dismissible fade show  py-2 small" role="alert">
+                                {{ $errors->first('gagal') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert">
+                                </button>
+                            </div>
                         @endif
                         <form action="{{ route('login.proses') }}" method="POST"> @csrf
                             <div class="mb-3">
@@ -80,6 +80,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Masuk
                                 </button>
+                                <div class="text-left mt-1">
+                                    <a href="{{ route('beranda') }}" class="btn btn-link">Beranda</a>
+                                </div>
                             </div>
                         </form>
                     </div>

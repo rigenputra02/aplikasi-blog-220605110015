@@ -299,15 +299,13 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('artikel.index') }}"
-                            class="{{ request()->routeIs('artikel.*') ? 'active' : '' }}">
+                        <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">
                             Artikel
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('kategori.index') }}"
-                            class="{{ request()->routeIs('kategori.*') ? 'active' : '' }}">
+                        <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">
                             Kategori
                         </a>
                     </li>
