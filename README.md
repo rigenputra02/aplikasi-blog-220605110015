@@ -1,6 +1,4 @@
-# Rigen Ferdian Saputra - 220605110015
-
-# Aplikasi Blog Laravel
+# Aplikasi Blog Laravel - Rigen Ferdian Saputra - 220605110015
 
 ## Deskripsi Aplikasi
 
