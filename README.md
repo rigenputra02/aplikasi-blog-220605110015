@@ -283,6 +283,14 @@ Tonton demo aplikasi di YouTube:
 
 ## [▶️ Demo Aplikasi Blog Laravel](https://youtu.be/Nnp0i2pBvMQ)
 
+---
+
+## Screenshot
+
+![Beranda](image-1.png)
+![Kategori Artikel](image-2.png)
+![Detail Artikel](image-3.png)
+
 ## Lisensi
 
 Project ini dibuat untuk tujuan pembelajaran, pengembangan portofolio, dan implementasi Framework Laravel dalam membangun aplikasi web berbasis blog.
