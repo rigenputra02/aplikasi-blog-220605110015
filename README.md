@@ -1,58 +1,280 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi Blog Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi Aplikasi
 
-## About Laravel
+Aplikasi Blog Laravel adalah website blog sederhana yang dibangun menggunakan Laravel dan Bootstrap 5. Aplikasi ini memiliki fitur manajemen artikel, kategori, penulis, autentikasi login, halaman publik, filter artikel berdasarkan kategori, artikel terkait, dan tampilan responsif yang dapat diakses melalui berbagai perangkat.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Blog Kami merupakan media informasi yang membahas berbagai topik seputar teknologi, pemrograman, dan pengembangan perangkat lunak. Melalui artikel yang informatif dan mudah dipahami, aplikasi ini berupaya menyajikan wawasan terbaru, tutorial praktis, serta berbagai tips yang dapat membantu pembaca dalam memahami dan mengikuti perkembangan dunia teknologi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi ini dibangun menggunakan Framework Laravel dengan menerapkan konsep MVC (Model-View-Controller), Eloquent ORM, Blade Template Engine, dan Middleware Authentication sehingga menghasilkan struktur aplikasi yang terorganisir, aman, dan mudah dikembangkan.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Fitur Utama
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Area Publik
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Halaman Beranda
+- Detail Artikel
+- Artikel Berdasarkan Kategori
+- Artikel Terkait
+- Halaman Tentang Kami
+- Widget Kategori Artikel
+- Pagination Artikel
+- Responsive Layout
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Area Admin
 
-## Agentic Development
+- Login dan Logout
+- Dashboard
+- CRUD Artikel
+- CRUD Kategori Artikel
+- CRUD Penulis
+- Upload Gambar Artikel
+- Manajemen Konten Blog
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## Route dan Akses Halaman Publik
 
-php artisan boost:install
+Pada tahap pengembangan ini, aplikasi blog dibagi menjadi dua area utama, yaitu area Admin yang dilindungi autentikasi dan area Publik yang dapat diakses oleh seluruh pengunjung tanpa harus melakukan login.
+
+### Route Admin (Protected Route)
+
+Semua fitur manajemen data ditempatkan di dalam grup middleware `auth` sehingga hanya pengguna yang telah berhasil login yang dapat mengaksesnya.
+
+Fitur yang dilindungi meliputi:
+
+- Dashboard Admin
+- Manajemen Artikel
+- Manajemen Penulis
+- Manajemen Kategori
+- Logout
+
+```php
+Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    Route::resource('artikel', ArtikelController::class)
+        ->except(['show']);
+
+    Route::resource('penulis', PenulisController::class)
+        ->except(['show']);
+
+    Route::resource('kategori', KategoriArtikelController::class)
+        ->except(['show']);
+});
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Route Publik (Public Route)
 
-## Contributing
+Salah satu pengembangan utama pada project ini adalah penambahan halaman publik sehingga website dapat berfungsi sebagai media blog yang dapat dibaca oleh siapa saja tanpa perlu login.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Halaman Beranda
 
-## Code of Conduct
+Menampilkan seluruh artikel yang telah dipublikasikan.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```php
+Route::get('/', [LandingController::class, 'index'])
+    ->name('beranda');
+```
 
-## Security Vulnerabilities
+#### Halaman Tentang Kami
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Menampilkan informasi mengenai website dan tujuan pengembangan blog.
 
-## License
+```php
+Route::get('/tentang-kami', [LandingController::class, 'tentangKami'])
+    ->name('tentang.kami');
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Artikel Berdasarkan Kategori
+
+Memungkinkan pengunjung memfilter artikel berdasarkan kategori yang dipilih melalui widget kategori.
+
+```php
+Route::get('/kategori/{id}',
+    [LandingController::class, 'kategori'])
+    ->name('kategori.show');
+```
+
+#### Detail Artikel
+
+Menampilkan isi artikel secara lengkap beserta artikel terkait yang berasal dari kategori yang sama.
+
+```php
+Route::get('/artikel/{id}',
+    [LandingController::class, 'show'])
+    ->name('blog.artikel');
+```
+
+### Manfaat Penambahan Route Publik
+
+Dengan adanya route publik, aplikasi tidak lagi hanya berfungsi sebagai sistem administrasi artikel, tetapi juga sebagai website blog yang dapat digunakan oleh pengunjung untuk:
+
+- Membaca artikel tanpa login
+- Melihat artikel berdasarkan kategori
+- Mengakses halaman detail artikel
+- Menjelajahi artikel terkait
+- Mengenal informasi website melalui halaman Tentang Kami
+
+Implementasi ini menerapkan pemisahan yang jelas antara area administrasi dan area publik sehingga keamanan data tetap terjaga sekaligus memberikan pengalaman membaca yang nyaman bagi pengunjung.
+
+---
+
+## Sistem Autentikasi
+
+Untuk menjaga keamanan data administrasi, aplikasi menggunakan sistem autentikasi Laravel yang membatasi akses ke halaman dashboard dan fitur manajemen data hanya untuk pengguna yang telah login.
+
+### Fitur Login
+
+- Verifikasi username dan password menggunakan Laravel Authentication.
+- Regenerasi session setelah login berhasil.
+- Menyimpan waktu login ke session.
+- Redirect otomatis ke dashboard.
+
+### Fitur Logout
+
+- Menghapus status autentikasi pengguna.
+- Menghapus seluruh session aktif.
+- Regenerasi CSRF Token.
+- Redirect kembali ke halaman login.
+
+### Keamanan yang Diterapkan
+
+- Middleware `auth`
+- Middleware `guest`
+- Session Regeneration
+- Session Invalidation
+- CSRF Protection
+
+---
+
+## Teknologi yang Digunakan
+
+- Laravel
+- PHP
+- MySQL
+- Bootstrap 5
+- Blade Template Engine
+- Eloquent ORM
+- Laravel Authentication
+
+---
+
+## Cara Menjalankan Project di Lokal
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/username/aplikasi-blog.git
+```
+
+Masuk ke direktori project:
+
+```bash
+cd aplikasi-blog
+```
+
+### 2. Install Dependency
+
+```bash
+composer install
+```
+
+### 3. Buat File Environment
+
+Linux / MacOS:
+
+```bash
+cp .env.example .env
+```
+
+Windows:
+
+```bash
+copy .env.example .env
+```
+
+### 4. Konfigurasi Database
+
+Sesuaikan konfigurasi database pada file `.env`.
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_blog
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Jalankan Migrasi Database
+
+Jika menggunakan migration:
+
+```bash
+php artisan migrate
+```
+
+Jika tersedia seeder:
+
+```bash
+php artisan db:seed
+```
+
+### 7. Membuat Symbolic Link Storage
+
+Agar gambar artikel dapat ditampilkan:
+
+```bash
+php artisan storage:link
+```
+
+### 8. Jalankan Server Laravel
+
+```bash
+php artisan serve
+```
+
+Aplikasi dapat diakses melalui:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## Struktur Fitur
+
+```text
+Aplikasi Blog Laravel
+│
+├── Login & Logout
+├── Dashboard
+├── CRUD Artikel
+├── CRUD Kategori
+├── CRUD Penulis
+├── Upload Gambar Artikel
+├── Halaman Publik
+├── Filter Artikel Berdasarkan Kategori
+├── Artikel Terkait
+├── Widget Kategori Artikel
+├── Pagination
+├── Halaman Tentang Kami
+└── Responsive Design
+```
+
+---
+
+## Lisensi
+
+Project ini dibuat untuk tujuan pembelajaran, pengembangan portofolio, dan implementasi Framework Laravel dalam membangun aplikasi web berbasis blog.
