@@ -171,7 +171,7 @@ Untuk menjaga keamanan data administrasi, aplikasi menggunakan sistem autentikas
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/aplikasi-blog.git
+git clone https://github.com/rigenputra02/aplikasi-blog-220605110015.git
 ```
 
 Masuk ke direktori project:
