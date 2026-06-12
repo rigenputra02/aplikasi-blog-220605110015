@@ -277,6 +277,10 @@ Aplikasi Blog Laravel
 
 ---
 
+## Database
+
+## [db_blog](<../../../../Users/RIGEN FERDIAN/Downloads/db_blog.sql>)
+
 ## Video Demo
 
 Tonton demo aplikasi di YouTube:
