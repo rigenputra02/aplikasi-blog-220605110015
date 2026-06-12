@@ -279,9 +279,9 @@ Aplikasi Blog Laravel
 
 ## Database
 
-File database ada di folder Database.
-username : @andi, @fulan, @rizky, dll.
-password : 12345678
+<p>File database ada di folder Database.</p>
+<p>username : @andi, @fulan, @rizky, dll.</p>
+<p>password : 12345678</p>
 
 ## Video Demo
 
