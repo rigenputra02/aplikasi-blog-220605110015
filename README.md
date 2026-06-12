@@ -279,7 +279,9 @@ Aplikasi Blog Laravel
 
 ## Database
 
-## [db_blog](<../../../../Users/RIGEN FERDIAN/Downloads/db_blog.sql>)
+File database ada di folder Database.
+username : @andi, @fulan, @rizky, dll.
+password : 12345678
 
 ## Video Demo
 
