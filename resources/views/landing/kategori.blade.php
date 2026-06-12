@@ -64,5 +64,5 @@
         </div>
     @endforelse
 
-    {{ $artikel->links() }}
+    {{-- {{ $artikel->links() }} --}}
 @endsection

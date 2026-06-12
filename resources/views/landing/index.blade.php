@@ -57,4 +57,7 @@
             Belum ada artikel yag tersedia
         </div>
     @endforelse
+    <div class="d-flex justify-content-center mt-4" color:green>
+        {{ $artikel->links() }}
+    </div>
 @endsection

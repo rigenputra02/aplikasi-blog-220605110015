@@ -231,7 +231,7 @@
 
             border-radius: 50%;
 
-            background: #198754;
+            background: #126bf0;
             color: white;
 
             display: flex;

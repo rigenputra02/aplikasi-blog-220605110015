@@ -33,7 +33,8 @@ class LandingController extends Controller
         ])
             ->where('id_kategori', $id)
             ->orderBy('hari_tanggal', 'desc')
-            ->paginate(5);
+        // ->take(5)
+            ->get();
 
         return view('landing.kategori', compact(
             'artikel',

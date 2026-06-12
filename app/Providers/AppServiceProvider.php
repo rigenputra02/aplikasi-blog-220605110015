@@ -3,6 +3,7 @@ namespace App\Providers;
 
 use App\Models\Artikel;
 use App\Models\KategoriArtikel;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 'totalArtikel',
                 Artikel::count()
             );
-
         });
+        Paginator::useBootstrapFive();
     }
 }
